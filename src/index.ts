@@ -103,6 +103,9 @@ class LeetPress {
     const content = `<!DOCTYPE html>
     <html>
     <body>
+    <head>
+      <base href="https://leetcode.com">
+    </head>
     `;
     await LeetPress._writeStream(stream, content);
   }
