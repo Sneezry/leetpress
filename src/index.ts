@@ -168,7 +168,7 @@ class LeetPress {
 
       try {
         const problemDetails = await LeetPress._queryProblem(problem.stat.question__title_slug);
-        const content = `<h1>${problemDetails.data.question.title}<upper>${problemDetails.data.question.difficulty}</upper></h1>
+        const content = `<h1>${problemDetails.data.question.title}<sup>${problemDetails.data.question.difficulty}</sup></h1>
         ${problemDetails.data.question.content}`;
         await LeetPress._writeStream(stream, content);
         console.log(`${problemDetails.data.question.questionId}. ${problemDetails.data.question.title}`);
