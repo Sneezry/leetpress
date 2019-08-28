@@ -31,6 +31,9 @@ interface ProblemDetailResponse {
 }
 
 class LeetPress {
+  private static OUTPUT_PATH = './problems.html';
+  private static BREAK_LOG_PATH = './break.log';
+
   private static async _getProblemList(includePayOnly = false) {
     const uri = 'https://leetcode.com/api/problems/all/';
     const response: ProblemListResponse = await rq.get({
@@ -81,8 +84,8 @@ class LeetPress {
     return response;
   }
 
-  private static _openWriteStream(outPath: string) {
-    const stream = fs.createWriteStream(outPath, {
+  private static _openWriteStream() {
+    const stream = fs.createWriteStream(LeetPress.OUTPUT_PATH, {
       flags: 'a',
     });
     return stream;
@@ -117,9 +120,8 @@ class LeetPress {
   }
 
   private static async _writeBreakLog(questionId: number) {
-    const logPath = './break.log';
     return new Promise((resolve, reject) => {
-      fs.writeFile(logPath, questionId.toString(), (error) => {
+      fs.writeFile(LeetPress.BREAK_LOG_PATH, questionId.toString(), (error) => {
         if (error) {
           return reject(error);
         }
@@ -129,25 +131,34 @@ class LeetPress {
   }
 
   private static async _getBreakLog(): Promise<number> {
-    const logPath = './break.log';
     return new Promise((resolve, reject) => {
-      fs.exists(logPath, (exists) => {
+      fs.exists(this.BREAK_LOG_PATH, (exists) => {
         if (exists) {
-          fs.readFile(logPath, (error, data) => {
+          fs.readFile(this.BREAK_LOG_PATH, (error, data) => {
             if (error) {
               return reject(error);
             }
 
-            fs.unlink(logPath, (error) => {
+            fs.unlink(this.BREAK_LOG_PATH, (error) => {
               if (error) {
                 return reject(error);
               }
-              
               return resolve(Number(data.toString()));
             });
           });
         } else {
-          return resolve(1);
+          fs.exists(LeetPress.OUTPUT_PATH, (exists) => {
+            if (exists) {
+              fs.unlink(LeetPress.OUTPUT_PATH, (error) => {
+                if (error) {
+                  return reject(error);
+                }
+                return resolve(1);
+              });
+            } else {
+              return resolve(1);
+            }
+          });
         }
       });
     });
@@ -156,7 +167,7 @@ class LeetPress {
   static async run() {
     const startId = await LeetPress._getBreakLog();
     const outPath = './problems.html';
-    const stream = LeetPress._openWriteStream(outPath);
+    const stream = LeetPress._openWriteStream();
     if (startId === 1) {
       await LeetPress._writeHtmlHead(stream);
     }

@@ -1,16 +1,16 @@
 {
   "name": "leetpress",
   "version": "1.0.0",
-  "description": "",
+  "description": "Generate single HTML file for all LeetCode problems (excluding pay-only problems) for printing or off line reading.",
   "main": "out/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sneezry/leetpress.git"
   },
-  "author": "",
+  "author": "Zhe Li",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Sneezry/leetpress/issues"
