@@ -1,6 +1,6 @@
 # LeetPress
 
-Generate single HTML file for all LeetCode problems (excluding pay-only problems) for printing or off line reading.
+Generate single HTML file for all LeetCode problems (excluding pay-only problems) for printing or offline reading.
 
 ## Caution
 
@@ -15,6 +15,7 @@ You should agree LeetCode terms, and use this tool at your own risk. This projec
 ## Build from Source Code
 
 * Install TypeScript: <https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html>
+* `npm install`
 * `npm run build`
 
 ## Start to Run LeetPress
