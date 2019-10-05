@@ -30,7 +30,7 @@ You should agree LeetCode terms, and use this tool at your own risk. This projec
 
 * Q: Where dose my generated file go?
 
-  A: Your generated file goes `./problems.html` under the current direction where you start LeetPress.
+  A: Your generated file goes `./problems.html` under the current directory where you start LeetPress.
 
 ## License
 
